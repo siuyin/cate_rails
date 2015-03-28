@@ -5,11 +5,14 @@
     <%= label_tag 'Request: ' +  @funding.title   %>
   </p>
   <p>
-    <%= label_tag 'Requested Amount: ' +  @funding.amtTarget.to_s   %>
+    <%= label_tag 'Requested Target Amount: ' +  @funding.amtTarget.to_s   %>
+  </p>
+  <p>
+    <%= label_tag 'Current Funding Level: ' +  @funding.amtCurrent.to_s   %>
   </p>
   <p>
     <%= label_tag 'Fulfil Amount (to send): ' %>
-    <%= text_field_tag 'amount',@funding.amtTarget.to_s,placeholder: "Eg. 10.00" %>
+    <%= text_field_tag 'amount',(@funding.amtTarget - @funding.amtCurrent).to_s,placeholder: "Eg. 10.00" %>
   </p>
   <div id="dropin"></div>
   <%= hidden_field_tag 'id', @funding.id %>
