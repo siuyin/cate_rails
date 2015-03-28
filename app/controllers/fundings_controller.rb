@@ -80,7 +80,8 @@ class FundingsController < ApplicationController
       @status = rst.transaction.status
       @funding.amtCurrent = @funding.amtCurrent + amt.to_i
       @funding.save
-      Hoiio.send_voice_call("+6598814308","Thank you for your generous donation")
+      puts ENV['HOIIO_APP']
+      Hoiio.send_voice_call(ENV['PHONE_TO_CALL'],"Thank you for your generous donation")
     else
       @status = rst.errors + " " +  rst.transaction.status
     end
