@@ -1,4 +1,6 @@
 require 'braintree'
+require 'hoiio'
+
 class FundingsController < ApplicationController
   before_action :set_funding, only: [:show, :edit, :update, :destroy, :fulfil, :prcs]
 
@@ -78,6 +80,7 @@ class FundingsController < ApplicationController
       @status = rst.transaction.status
       @funding.amtCurrent = @funding.amtCurrent + amt.to_i
       @funding.save
+      Hoiio.send_voice_call("+6598814308","Thank you for your generous donation")
     else
       @status = rst.errors + " " +  rst.transaction.status
     end
@@ -88,6 +91,8 @@ class FundingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_funding
       @funding = Funding.find(params[:id])
+      @funding.amtTarget = 0 unless @funding.amtTarget
+      @funding.amtCurrent = 0 unless @funding.amtCurrent
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
