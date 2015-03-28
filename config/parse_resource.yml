@@ -1,6 +1,6 @@
 development:
-  app_id: <%= CATE_APP %>
-  master_key: <%= CATE_KEY %>
+  app_id: <%= ENV['CATE_APP'] %>
+  master_key: <%= ENV['CATE_MASTER_KEY'] %>
 
 test:
   app_id: 1234567890
