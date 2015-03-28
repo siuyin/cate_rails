@@ -44,7 +44,9 @@ class FundingsController < ApplicationController
   # PATCH/PUT /fundings/1.json
   def update
     respond_to do |format|
-      if @funding.update(funding_params)
+      prm = funding_params
+      prm = prm.delete_if{|k,v| k=='photo'}
+      if @funding.update(prm)
         format.html { redirect_to @funding, notice: 'Funding was successfully updated.' }
         format.json { render :show, status: :ok, location: @funding }
       else
