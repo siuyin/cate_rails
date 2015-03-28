@@ -1,36 +1,83 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Cate's Funding Requests</h1>
+<h1 class="ui header">Cate's Funding Requests</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Photo</th>
-      <th>Target Amount</th>
-      <th>Current Amount</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @fundings.each do |funding| %>
-      <tr>
-        <td><%= funding.title %></td>
-        <td><%= funding.content %></td>
-        <td><%= funding.photo %></td>
-        <td><%= funding.amtTarget %></td>
-        <td><%= funding.amtCurrent %></td>
-        <td><%= link_to 'Show', funding %></td>
-        <td><%= link_to 'Edit', edit_funding_path(funding) %></td>
-        <td><%= link_to 'Fulfill', fulfil_funding_path(funding) %></td>
-        <td><%= link_to 'Delete', funding, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<h3 class="header">
+  <div class="ui  secondary animated button">
+<i class="usd icon"></i>
 <%= link_to 'New Funding Request', new_funding_path %>
+  </div>
+</h3>
+
+<br style="clear:both;">
+
+
+<% @fundings.each do |funding| %>
+<div class="ui card" style="float: left; margin: 1em;">
+  <div class="image dimmable">
+    <div class="ui dimmer">
+      <div class="content">
+        <div class="center">
+          <div class="ui inverted button">Fund this!</div>
+        </div>
+      </div>
+    </div>
+    <%= image_tag funding.photo if funding.photo %>
+   
+  </div>
+  
+  
+  
+  <div class="content">
+    <div class="header"><%= funding.title %></div>
+   
+    <div class="description">
+      <%= funding.content %>
+    </div>    
+
+   <div class="meta">
+      <a class="group">
+        Target: <%= number_to_currency funding.amtTarget %><br/>
+      Current: <%= number_to_currency funding.amtCurrent %>
+      </a>
+    </div>
+    
+  <!--
+  <div class="extra content">
+    <a class="right floated created">Arbitrary</a>
+    <a class="friends">
+      Arbitrary</a>
+  </div>
+-->
+  
+  <div class="ui two bottom attached buttons">
+    <div class="ui basic floated">
+            <i class="list ul icon"></i>
+      <%= link_to 'Show', funding %>
+    </div>
+    <div class="ui  primary animated floated">
+      <i class="edit icon"></i>
+      <%= link_to 'Edit', edit_funding_path(funding) %>
+    </div>
+    </div>
+    <div class="ui two bottom attached buttons">
+
+    <div class="ui secondary animated floated">
+      <i class="credit card icon"></i>
+<!--       checkmark -->
+      <%= link_to 'Fullfill', fulfil_funding_path(funding) %>
+    </div>
+
+    <div class="ui red floated">
+            <i class="trash icon"></i>
+      <%= link_to 'Destroy', funding, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+   </div>
+
+      </div>
+</div>
+    <% end %>
+
+
+
+
