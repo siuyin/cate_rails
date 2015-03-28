@@ -1,6 +1,6 @@
 require 'braintree'
 class FundingsController < ApplicationController
-  before_action :set_funding, only: [:show, :edit, :update, :destroy, :fulfil]
+  before_action :set_funding, only: [:show, :edit, :update, :destroy, :fulfil, :prcs]
 
   # GET /fundings
   # GET /fundings.json
@@ -76,6 +76,8 @@ class FundingsController < ApplicationController
     )
     if rst.success?
       @status = rst.transaction.status
+      @funding.amtCurrent = @funding.amtCurrent + amt.to_i
+      @funding.save
     else
       @status = rst.errors + " " +  rst.transaction.status
     end
