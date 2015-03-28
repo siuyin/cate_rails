@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Braintree
+gem 'braintree'
+
 # parse.com resource
 #gem "parse_resource", "~> 1.8.0"
 gem 'parse_resource', github: 'adelevie/parse_resource'

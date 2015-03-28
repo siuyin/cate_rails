@@ -1,0 +1,29 @@
+<h1>Fulfilling Cate's Funding Request</h1>
+
+<%= form_tag('/checkout') do %>
+  <p>
+    <%= label_tag 'Request: ' +  @funding.title   %>
+  </p>
+  <p>
+    <%= label_tag 'Requested Amount: ' +  @funding.amtTarget.to_s   %>
+  </p>
+  <p>
+    <%= label_tag 'Fulfil Amount (to send): ' %>
+    <%= text_field_tag 'amount',@funding.amtTarget.to_s,placeholder: "Eg. 10.00" %>
+  </p>
+  <div id="dropin"></div>
+  <%= submit_tag "Pay" %>
+<% end %>
+
+<div id="dropin"></div>
+<script>
+  braintree.setup(
+    // Replace this with a client token from your server
+    '<%= @ctok %>',
+    'dropin', {
+      container: 'dropin'
+    });
+</script>
+
+<%= link_to 'Show', @funding %> |
+<%= link_to 'Back', fundings_path %>

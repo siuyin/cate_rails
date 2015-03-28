@@ -1,4 +1,4 @@
-require 'pp'
+require 'braintree'
 class FundingsController < ApplicationController
   before_action :set_funding, only: [:show, :edit, :update, :destroy, :fulfil]
 
@@ -63,7 +63,24 @@ class FundingsController < ApplicationController
   end
 
   def fulfil
+    @ctok = Braintree::ClientToken.generate
   end
+
+  def prcs
+    nce = params['payment_method_nonce']
+    amt = params['amount'].strip if params['amount'] and !params['amount'].empty?
+    rst = Braintree::Transaction.sale(
+      :amount=>amt,
+      :options => {:submit_for_settlement => true},
+      :payment_method_nonce => nce
+    )
+    if rst.success?
+      @status = rst.transaction.status
+    else
+      @status = rst.errors + " " +  rst.transaction.status
+    end
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
