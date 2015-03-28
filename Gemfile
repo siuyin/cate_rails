@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# parse.com resource
+gem "parse_resource", "~> 1.8.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

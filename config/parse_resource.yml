@@ -1,0 +1,11 @@
+development:
+  app_id: <%= CATE_APP %>
+  master_key: <%= CATE_KEY %>
+
+test:
+  app_id: 1234567890
+  master_key: abcdefgh
+
+production:
+  app_id: 1234567890
+  master_key: abcdefgh
