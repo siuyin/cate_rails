@@ -1,6 +1,6 @@
 require 'pp'
 class FundingsController < ApplicationController
-  before_action :set_funding, only: [:show, :edit, :update, :destroy]
+  before_action :set_funding, only: [:show, :edit, :update, :destroy, :fulfil]
 
   # GET /fundings
   # GET /fundings.json
@@ -60,6 +60,9 @@ class FundingsController < ApplicationController
       format.html { redirect_to fundings_url, notice: 'Funding was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def fulfil
   end
 
   private

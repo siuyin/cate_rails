@@ -24,6 +24,7 @@
         <td><%= funding.amtCurrent %></td>
         <td><%= link_to 'Show', funding %></td>
         <td><%= link_to 'Edit', edit_funding_path(funding) %></td>
+        <td><%= link_to 'Fulfil', fulfil_funding_path(funding) %></td>
         <td><%= link_to 'Destroy', funding, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
