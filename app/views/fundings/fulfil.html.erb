@@ -1,19 +1,33 @@
 <h1>Fulfilling Cate's Funding Request</h1>
 
-<%= form_tag('/checkout') do %>
+<%= form_tag('/checkout', { class: "ui form segment" }) do %>
   <p>
-    <%= label_tag 'Request: ' +  @funding.title   %>
-  </p>
-  <p>
-    <%= label_tag 'Requested Target Amount: ' +  @funding.amtTarget.to_s   %>
-  </p>
-  <p>
-    <%= label_tag 'Current Funding Level: ' +  @funding.amtCurrent.to_s   %>
-  </p>
-  <p>
+<div class="ui card" >
+  <div class="image dimmable">
+    
+    <%= image_tag @funding.photo if @funding.photo %>
+   
+  </div>
+  
+  
+  <div class="content">
+    <div class="header"><%= @funding.title %></div>
+   
+    <div class="description">
+      <%= @funding.content %>
+    </div>    
+
+   <div class="meta">
+      <a class="group">
+        Target: <%= number_to_currency @funding.amtTarget %><br/>
+      Current: <%= number_to_currency @funding.amtCurrent %>
+      </a>
+    </div>
+    
+  <div class="inline fields">
     <%= label_tag 'Fulfil Amount (to send): ' %>
     <%= text_field_tag 'amount',(@funding.amtTarget - @funding.amtCurrent).to_s,placeholder: "Eg. 10.00" %>
-  </p>
+  </div>
   <div id="dropin"></div>
   <%= hidden_field_tag 'id', @funding.id %>
   <%= submit_tag "Pay" %>
