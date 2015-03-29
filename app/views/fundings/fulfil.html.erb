@@ -25,7 +25,7 @@
     </div>
     
   <div class="inline fields">
-    <%= label_tag 'Fulfil Amount (to send): ' %>
+    <%= label_tag 'Fulfill Amount (to send): ' %>
     <%= text_field_tag 'amount',(@funding.amtTarget - @funding.amtCurrent).to_s,placeholder: "Eg. 10.00" %>
   </div>
   <div id="dropin"></div>
